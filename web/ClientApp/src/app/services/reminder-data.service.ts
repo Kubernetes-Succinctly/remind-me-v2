@@ -10,7 +10,9 @@ export class ReminderDataService {
   constructor(private apiService: ApiService) {}
 
   addReminder(reminder: Reminder): void {
-    this.apiService.createReminder(reminder);
+    this.apiService
+      .createReminder(reminder)
+      .subscribe(result => result, error => console.log(error));
   }
 
   deleteTodoById(id: string): ReminderDataService {

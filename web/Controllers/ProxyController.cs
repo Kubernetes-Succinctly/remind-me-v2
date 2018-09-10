@@ -10,7 +10,7 @@ public class ProxyController : Controller
     {
         var client = new RestClient("http://example.com");
     }
-    public IActionResult SaveReminder(Reminder reminder)
+    public IActionResult SaveReminder([FromBody] Reminder reminder)
     {
         return Ok();
     }
