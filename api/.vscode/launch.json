@@ -5,13 +5,13 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": ".NET Core Launch (web)",
+      "name": ".NET Core Launch (api)",
       "type": "coreclr",
       "request": "launch",
       "preLaunchTask": "build",
-      "program": "${workspaceFolder}/web/bin/Debug/netcoreapp2.1/remind-me.dll",
+      "program": "${workspaceFolder}/api/bin/Debug/netcoreapp2.1/remind-me.dll",
       "args": [],
-      "cwd": "${workspaceFolder}/web",
+      "cwd": "${workspaceFolder}/api",
       "stopAtEntry": false,
       "internalConsoleOptions": "openOnSessionStart",
       "launchBrowser": {
