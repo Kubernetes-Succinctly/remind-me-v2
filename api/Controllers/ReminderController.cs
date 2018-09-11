@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using LiteDB;
 using Microsoft.AspNetCore.Mvc;
 using remind_me_api.Models;
 
@@ -9,21 +11,29 @@ namespace remind_me_api.Controllers
     [ApiController]
     public class ReminderController : ControllerBase
     {
-        static List<Reminder> reminders = new List<Reminder>();
+        string connectionString = "Reminders.db";
 
         // GET api/reminder/all
         [HttpGet("all")]
         public ActionResult<IEnumerable<Reminder>> Get()
         {
-            return reminders;
+            using(var db = new LiteDatabase(connectionString))
+            {
+                var remindersCollection = db.GetCollection<Reminder>("reminders");
+                return remindersCollection.FindAll().ToList();
+            }
         }
 
         // POST api/reminder
         [HttpPost]
         public void Post([FromBody] Reminder value)
         {
-            value.Id = Guid.NewGuid().ToString();
-            reminders.Add(value);
+            using(var db = new LiteDatabase(connectionString))
+            {
+                var remindersCollection = db.GetCollection<Reminder>("reminders");
+                value.Id = Guid.NewGuid().ToString();
+                remindersCollection.Insert(value);
+            }
         }
 
         [HttpDelete("{id}")]
