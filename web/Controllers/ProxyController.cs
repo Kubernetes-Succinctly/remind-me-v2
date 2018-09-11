@@ -1,27 +1,36 @@
 using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using RestSharp;
 
 public class ProxyController : Controller
 {
-    public ProxyController()
+    public IConfiguration Configuration { get; set; }
+
+    private RestClient client;
+
+    public ProxyController(IConfiguration config)
     {
-        var client = new RestClient("http://example.com");
+        this.Configuration = config;
+        this.client = new RestClient(Configuration["apiUrl"]);
     }
     public IActionResult SaveReminder([FromBody] Reminder reminder)
     {
+        var request = new RestRequest("reminder", Method.POST);
+        request.AddParameter("reminder", reminder);
+        var response = this.client.Execute(request);
         return Ok();
     }
     public IActionResult GetAllReminders()
     {
-        var reminders = new List<Reminder>();
-        reminders.Add(new Reminder { Id = "1", Title = "Test Title", DueDate = DateTime.Today });
-        return Ok(reminders);
+        var request = new RestRequest("reminder/all", Method.GET);
+        var response = this.client.Execute(request);
+        return Ok(response.Content);
     }
     public IActionResult DeleteReminder(string reminderId)
     {
-        return Ok();
+        return Unauthorized();
     }
 }
