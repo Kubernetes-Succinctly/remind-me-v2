@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
@@ -15,17 +16,18 @@ public class ProxyController : Controller
     {
         this.Configuration = config;
         this.client = new RestClient(Configuration["apiUrl"]);
+        this.client.RemoteCertificateValidationCallback = (sender, certificate, chain, sslPolicyErrors) => true;
     }
     public IActionResult SaveReminder([FromBody] Reminder reminder)
     {
-        var request = new RestRequest("reminder", Method.POST);
-        request.AddParameter("reminder", reminder);
+        var request = new RestRequest("/api/Reminder", Method.POST);
+        request.AddParameter("application/json", JsonConvert.SerializeObject(reminder), ParameterType.RequestBody);
         var response = this.client.Execute(request);
-        return Ok();
+        return StatusCode((int) response.StatusCode);
     }
     public IActionResult GetAllReminders()
     {
-        var request = new RestRequest("reminder/all", Method.GET);
+        var request = new RestRequest("/api/Reminder/all", Method.GET);
         var response = this.client.Execute(request);
         return Ok(response.Content);
     }

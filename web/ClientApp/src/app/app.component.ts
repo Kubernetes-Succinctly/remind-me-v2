@@ -27,6 +27,10 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.fetchReminders();
+  }
+
+  private fetchReminders() {
     this.reminderDataService
       .getAllReminders()
       .subscribe(reminders => (this.reminders = reminders));
@@ -35,5 +39,6 @@ export class AppComponent implements OnInit {
   onSubmit(reminder) {
     this.reminderDataService.addReminder(reminder);
     this.form.reset();
+    this.fetchReminders();
   }
 }
