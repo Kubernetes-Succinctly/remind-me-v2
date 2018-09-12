@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using LiteDB;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using remind_me_api.Models;
 
 namespace remind_me_api.Controllers
@@ -11,7 +12,13 @@ namespace remind_me_api.Controllers
     [ApiController]
     public class ReminderController : ControllerBase
     {
-        string connectionString = "Reminders.db";
+        public IConfiguration Configuration { get; set; }
+        string connectionString;
+        public ReminderController(IConfiguration configuration)
+        {
+            this.Configuration = configuration;
+            this.connectionString = Configuration["dbPath"];
+        }
 
         // GET api/reminder/all
         [HttpGet("all")]
