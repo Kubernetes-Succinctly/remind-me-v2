@@ -31,7 +31,7 @@
       },
       "env": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "dbPath": "/dataStore/Reminders.db"
+        "dbPath": "Reminders.db"
       },
       "sourceFileMap": {
         "/Views": "${workspaceFolder}/Views"

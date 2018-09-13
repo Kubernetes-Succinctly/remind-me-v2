@@ -16,7 +16,6 @@ public class ProxyController : Controller
     {
         this.Configuration = config;
         this.client = new RestClient(Configuration["apiUrl"]);
-        this.client.RemoteCertificateValidationCallback = (sender, certificate, chain, sslPolicyErrors) => true;
     }
     public IActionResult SaveReminder([FromBody] Reminder reminder)
     {

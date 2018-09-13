@@ -60,11 +60,13 @@ docker build -t remind-me-web .
 
 Execute the following command to start a container named `remind-me-web-c` using the generated image on your Docker instance.
 
+// to do edit this. add how to add volume to contaiuner
+
 ```
-docker run -d -p 8080:80 --name remind-me-web-c remind-me-web
+docker run -d -e dbPath=/data/Reminder.db -v c:/data:/data/ -p 8081:80 --name remind-me-api-c remind-me-api
 ```
 
-From your browser, navigate to http://localhost:8080 to view the application. To keep this image consistent with the book, we will never update the tag of this image. Tag your image using the following command.
+From your browser, navigate to http://localhost:8080 to view the application. To keep this docker image consistent with the book, we will never update the tag of this image. Tag your image using the following command.
 
 ```
 docker tag remind-me-web kubernetessuccinctly/remind-me-web:1.0.0

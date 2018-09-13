@@ -39,6 +39,9 @@ export class AppComponent implements OnInit {
   onSubmit(reminder) {
     this.reminderDataService.addReminder(reminder);
     this.form.reset();
-    this.fetchReminders();
+    // Giving it a small delay to save immediate calls to API.
+    setTimeout(() => {
+      this.fetchReminders();
+    }, 1000);
   }
 }

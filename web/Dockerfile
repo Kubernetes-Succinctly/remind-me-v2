@@ -32,4 +32,4 @@ RUN curl -SL "https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-lin
     && ln -s /usr/local/bin/node /usr/local/bin/nodejs
 
 COPY --from=build-env /app/out .
-ENTRYPOINT ["dotnet", "remind-me-api.dll"]
+ENTRYPOINT ["dotnet", "remind-me.dll"]
