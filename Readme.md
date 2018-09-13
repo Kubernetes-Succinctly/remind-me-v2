@@ -60,7 +60,7 @@ docker build -t remind-me-web .
 
 Execute the following command to start a container named `remind-me-web-c` using the generated image on your Docker instance.
 
-// to do edit this. add how to add volume to contaiuner
+// to do edit this. add how to add volume to container
 
 ```
 docker run -d -e dbPath=/data/Reminder.db -v c:/data:/data/ -p 8081:80 --name remind-me-api-c remind-me-api
