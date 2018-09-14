@@ -11,7 +11,7 @@ export class ApiService {
     return this.httpClient.get<Reminder[]>("/Proxy/GetAllReminders");
   }
 
-  public createReminder(reminder: Reminder) {
+  public createReminder(reminder: Reminder): Observable<any> {
     return this.httpClient.post("/Proxy/SaveReminder", reminder);
   }
 }

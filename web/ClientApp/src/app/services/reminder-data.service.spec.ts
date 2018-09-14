@@ -26,7 +26,9 @@ describe("ReminderDataService", () => {
       [ReminderDataService],
       (service: ReminderDataService) => {
         const reminder = new Reminder({ title: "Reminder Test" });
-        service.addReminder(reminder);
+        service
+          .addReminder(reminder)
+          .subscribe(result => expect(result != null));
       }
     ));
   });

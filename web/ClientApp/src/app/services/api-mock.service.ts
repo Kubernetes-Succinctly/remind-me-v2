@@ -12,7 +12,7 @@ export class ApiMockService {
     ]);
   }
 
-  public createReminder(reminder: Reminder) {
-    return;
+  public createReminder(reminder: Reminder): Observable<any> {
+    return Observable.of([true]);
   }
 }
