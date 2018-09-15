@@ -1,13 +1,7 @@
 {
   "folders": [
     {
-      "path": "./api/api.sln"
-    },
-    {
-      "path": "api/remind-me-api"
-    },
-    {
-      "path": "api/api-tests"
+      "path": "./api"
     }
   ],
   "settings": {
