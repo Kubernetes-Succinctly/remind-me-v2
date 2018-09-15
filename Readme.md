@@ -1,10 +1,10 @@
 # Remind Me v2.0
 
-This repository contains the source code of the second version of the application that we will deploy to our Kubernetes cluster. You can read more about this application and the steps that you need to follow to deploy this application in chapter three of the book. This is a simple .net Core Angular application that saves reminders in persistent storage through web API.
+This repository contains the source code of the second version of the application that we will deploy to our Kubernetes cluster. You can read more about this application and the steps that you need to follow to deploy this application in chapter **XX** of the book. This repository contains a simple .net Core Angular application that saves reminders in a persistent storage media through a stateful backend Web API.
 
 ## Getting started
 
-Copy the source code of the application to your system and open the workspace `remind-me.code-workspace` in Visual Studio Code. The web application is present in the **web** folder in the project directory. The Angular application is present in the **/web/ClientApp/** directory. The api source is present in **api** folder in the project directory.
+Copy the source code of the application to your system and open the workspace `remind-me.code-workspace` in Visual Studio Code. The web application is present in the **web** folder in the project directory. The Angular application is present in the **/web/ClientApp/** directory. The Web API source is present in **api** folder in the project directory.
 
 ### Prerequisites
 
@@ -15,10 +15,12 @@ This project uses the following tools and technologies.
 3. ASP.net Core on .Net Core 2.1
 4. Angular SPA on Angular 5
 5. Test Frameworks: Protractor, and Jasmine on Karma test runner
+6. .Net Core 2.1 Web API
+7. xUnit tests for .Net Core
 
 ### Installation
 
-Build the project from the CLI or VS Code. The build task will restore all the nuget packages and the npm dependencies. If you are using the command line, change to the **Web**/**api**(depending upon which project you are building) directory before executing the following commands. The following command will build the project.
+Build individual projects from the CLI or VS Code. For the frontend project in the **web** directory, the build task will restore all the nuget packages and the npm dependencies. If you are using the command line, depending upon which project you are building change to the **Web** or **api** directory before executing the following commands. The following command will build the project.
 
 ```
 dotnet build

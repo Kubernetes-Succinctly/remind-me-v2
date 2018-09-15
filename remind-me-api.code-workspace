@@ -1,0 +1,24 @@
+{
+  "folders": [
+    {
+      "path": "./api/api.sln"
+    },
+    {
+      "path": "api/remind-me-api"
+    },
+    {
+      "path": "api/api-tests"
+    }
+  ],
+  "settings": {
+    "cSpell.words": [
+      "Anim",
+      "Injectable",
+      "Kubernetes",
+      "Truthy",
+      "Validators",
+      "keyframes"
+    ],
+    "cSpell.language": "en"
+  }
+}
