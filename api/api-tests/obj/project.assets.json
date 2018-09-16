@@ -7666,11 +7666,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Source Control\\remind-me\\v2\\api\\api-tests\\remind-me-api.tests.csproj",
+      "projectUniqueName": "d:\\Source Control\\remind-me\\v2\\api\\api-tests\\remind-me-api.tests.csproj",
       "projectName": "remind-me-api.tests",
-      "projectPath": "D:\\Source Control\\remind-me\\v2\\api\\api-tests\\remind-me-api.tests.csproj",
+      "projectPath": "d:\\Source Control\\remind-me\\v2\\api\\api-tests\\remind-me-api.tests.csproj",
       "packagesPath": "C:\\Users\\rahul\\.nuget\\packages\\",
-      "outputPath": "D:\\Source Control\\remind-me\\v2\\api\\api-tests\\obj\\",
+      "outputPath": "d:\\Source Control\\remind-me\\v2\\api\\api-tests\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -7689,8 +7689,8 @@
       "frameworks": {
         "netcoreapp2.1": {
           "projectReferences": {
-            "D:\\Source Control\\remind-me\\v2\\api\\remind-me-api\\remind-me-api.csproj": {
-              "projectPath": "D:\\Source Control\\remind-me\\v2\\api\\remind-me-api\\remind-me-api.csproj"
+            "d:\\Source Control\\remind-me\\v2\\api\\remind-me-api\\remind-me-api.csproj": {
+              "projectPath": "d:\\Source Control\\remind-me\\v2\\api\\remind-me-api\\remind-me-api.csproj"
             }
           }
         }
