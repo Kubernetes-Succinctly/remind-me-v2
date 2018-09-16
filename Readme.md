@@ -36,7 +36,7 @@ To run the projects, change to the **web** folder for the web application and **
 dotnet run
 ```
 
-Running the project from VS Code will automatically launch the browser with the application. The web application can be accessed on https://localhost:5000, and the api application can be accessed on https://localhost:5001. These links will also be displayed on the command line if you are using the CLI to execute the applications. Since the applications use a user-generated certificate, you can ignore the certificate error displayed by the browser.
+Running the project from VS Code will automatically launch the browser with the application. The web application can be accessed on https://localhost:5001, and the api application can be accessed on https://localhost:5002. These links will also be displayed on the command line if you are using the CLI to execute the applications. Since the applications use a user-generated certificate, you can ignore the certificate error displayed by the browser.
 
 ## Running the tests
 
