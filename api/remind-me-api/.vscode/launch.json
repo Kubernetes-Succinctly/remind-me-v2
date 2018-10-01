@@ -30,8 +30,8 @@
         }
       },
       "env": {
-        "ASPNETCORE_ENVIRONMENT": "Development",
-        "dbPath": "Reminders.db"
+        "ASPNETCORE_ENVIRONMENT": "Development"
+        // "dbPath": "Reminders.db"
       },
       "sourceFileMap": {
         "/Views": "${workspaceFolder}/Views"

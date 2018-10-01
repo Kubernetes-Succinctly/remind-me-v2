@@ -1,38 +1,76 @@
-# Create a deployment. This will deploy our app on multiple nodes.
-apiVersion: apps/v1beta2
-kind: Deployment
+# Define a PVC
+kind: PersistentVolumeClaim
+apiVersion: v1
 metadata:
-  name: remindmeweb-deployment # name of our deployment
+  name: remind-me-api-pv-claim
 spec:
-  selector:
-    matchLabels:
-      app: remindmeweb # I'll deploy to all pods that have this label
-  replicas: 2 # run our app on 2 pods please!
-  template: # create pods using pod definition in this template
-    metadata:
-      labels:
-        app: remindmeweb # Label of the pods created by this template
-    spec:
-      containers:
-        - name: frontend # name of container
-          image: kubernetessuccinctly/remind-me-web:1.0.0
-          ports:
-            - containerPort: 80 # port on which the service is running
-              protocol: TCP
+  storageClassName: manual
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 3Gi
+---
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: remind-me-api-pv-volume
+  labels:
+    type: local
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/mnt/data"
 ---
 # Describe a service that consists of our web app pods
 apiVersion: v1
 kind: Service
 metadata:
-  name: remind-me-web-svc
+  name: remind-me-api-svc
   labels:
-    app: remind-me-web-svc
+    app: remind-me-api-svc
 spec:
   type: NodePort # type of service
   ports:
     - port: 8080 # service will accept traffic on port 8080
       protocol: TCP
       targetPort: 80 # traffic on port 8080 will be forwarded to port 80 of service
-      nodePort: 31120 # service will send and receive data from port 31120 of nodes.
+      nodePort: 31125 # service will send and receive data from port 31120 of nodes.
   selector:
-    app: remindmeweb
+    app: remindmeapi
+---
+# Create a deployment. This will deploy our app on multiple nodes.
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: remindmeapi-deployment # name of our deployment
+spec:
+  selector:
+    matchLabels:
+      app: remindmeapi # I'll deploy to all pods that have this label
+  replicas: 1 # run our app on 2 pods please!
+  template: # create pods using pod definition in this template
+    metadata:
+      labels:
+        app: remindmeapi # Label of the pods created by this template
+    spec:
+      containers:
+        - name: backend # name of container
+          imagePullPolicy: Always
+          image: kubernetessuccinctly/remind-me-api:1.0.0
+          ports:
+            - containerPort: 80 # port on which the service is running
+              protocol: TCP
+          volumeMounts:
+            - name: localvolume
+              mountPath: /data
+      volumes:
+        - name: localvolume
+          persistentVolumeClaim:
+            claimName: remind-me-api-pv-claim
+---
+
