@@ -25,7 +25,7 @@ namespace remind_me_api
                 configurationbuilder.SetBasePath(env.ContentRootPath);
                 configurationbuilder.AddJsonFile("appsettings.json", false, true);
                 configurationbuilder.AddJsonFile($"appsettings.{env}.json", true, true);
-                configurationbuilder.AddJsonFile($"secrets/appsettings.secrets.json", true, true);
+                configurationbuilder.AddJsonFile($"secrets/appsettings.secrets.json", true, true); // we will override the settings saved here.
                 configurationbuilder.AddEnvironmentVariables();
             })
             .UseStartup<Startup>()

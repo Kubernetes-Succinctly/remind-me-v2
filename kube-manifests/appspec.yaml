@@ -1,16 +1,4 @@
-# Define a PVC
-kind: PersistentVolumeClaim
-apiVersion: v1
-metadata:
-  name: remind-me-api-pv-claim
-spec:
-  storageClassName: manual
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 3Gi
----
+# Define a PV
 kind: PersistentVolume
 apiVersion: v1
 metadata:
@@ -18,13 +6,34 @@ metadata:
   labels:
     type: local
 spec:
-  storageClassName: manual
+  storageClassName: hostpath
   capacity:
     storage: 10Gi
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: "/mnt/data"
+    path: "/data"
+---
+# Define a PVC
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: remind-me-api-pv-claim
+spec:
+  storageClassName: hostpath
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 3Gi
+---
+# Create secret
+apiVersion: v1
+kind: Secret
+metadata:
+  name: api-secret
+data:
+  appsettings.secrets.json: "eyJkYlBhdGgiOiAiL2RhdGEvcmVtaW5kZXIuZGIifQ=="
 ---
 # Describe a service that consists of our web app pods
 apiVersion: v1
@@ -60,17 +69,22 @@ spec:
     spec:
       containers:
         - name: backend # name of container
-          imagePullPolicy: Always
-          image: kubernetessuccinctly/remind-me-api:1.0.0
+          imagePullPolicy: IfNotPresent
+          image: remind-me-api:test
           ports:
             - containerPort: 80 # port on which the service is running
               protocol: TCP
           volumeMounts:
             - name: localvolume
               mountPath: /data
+            - name: secretvolume
+              mountPath: /app/secrets
       volumes:
         - name: localvolume
           persistentVolumeClaim:
             claimName: remind-me-api-pv-claim
+        - name: secretvolume
+          secret:
+            secretName: api-secret
 ---
 
