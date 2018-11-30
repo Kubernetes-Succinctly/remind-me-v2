@@ -1,3 +1,35 @@
+# Create a deployment. This will deploy our app on multiple nodes.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: remindmeweb-deployment # name of our deployment
+spec:
+  selector:
+    matchLabels:
+      app: remindmeweb # I'll deploy to all pods that have this label
+  replicas: 2 # run our app on 2 pods please!
+  template: # create pods using pod definition in this template
+    metadata:
+      labels:
+        app: remindmeweb # Label of the pods created by this template
+    spec:
+      containers:
+        - name: frontend2 # name of container
+          image: kubernetessuccinctly/remind-me-web:2.0.0
+          resources:
+            requests:
+              cpu: 100m
+              memory: 100Mi
+            limits: 
+              cpu: 100m
+              memory: 100Mi
+          env:
+            - name: GET_HOSTS_FROM
+              value: env
+          ports:
+            - containerPort: 80
+              protocol: TCP
+---
 # Describe a service that consists of our web app pods
 apiVersion: v1
 kind: Service
@@ -14,35 +46,3 @@ spec:
       nodePort: 31120 # external users can access this service on port 31120 using kube-proxy.
   selector:
     app: remindmeweb
----
-# Replicaset for frontend
-apiVersion: apps/v1
-kind: ReplicaSet
-metadata:
-  name: remindmeweb-replicaset
-  labels:
-    app: remindmeweb
-spec:
-  # modify replicas according to your case
-  replicas: 2
-  selector:
-    matchLabels:
-      app: remindmeweb # I'll deploy to all pods that have this label
-  template:
-    metadata:
-      labels:
-        app: remindmeweb
-    spec:
-      containers:
-        - name: frontend2
-          image: kubernetessuccinctly/remind-me-web:2.0.0
-          resources:
-            requests:
-              cpu: 100m
-              memory: 100Mi
-          env:
-            - name: GET_HOSTS_FROM
-              value: env
-          ports:
-            - containerPort: 80
-              protocol: TCP
