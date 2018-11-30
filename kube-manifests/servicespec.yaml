@@ -70,7 +70,7 @@ spec:
       containers:
         - name: backend # name of container
           imagePullPolicy: IfNotPresent
-          image: remind-me-api:test
+          image: remind-me-api:1.0.0
           ports:
             - containerPort: 80 # port on which the service is running
               protocol: TCP
