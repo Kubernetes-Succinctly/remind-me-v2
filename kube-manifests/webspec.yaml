@@ -20,12 +20,14 @@ spec:
             requests:
               cpu: 100m
               memory: 100Mi
-            limits: 
+            limits:
               cpu: 100m
               memory: 100Mi
           env:
             - name: GET_HOSTS_FROM
               value: env
+            - name: apiUrl
+              value: http://remindmeapi-statefulset-0.remind-me-api-svc.default.svc.cluster.local
           ports:
             - containerPort: 80
               protocol: TCP
@@ -46,3 +48,4 @@ spec:
       nodePort: 31120 # external users can access this service on port 31120 using kube-proxy.
   selector:
     app: remindmeweb
+# https://kubernetes.io/docs/concepts/services-networking/connect-applications-service/

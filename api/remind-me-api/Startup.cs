@@ -29,7 +29,7 @@ namespace remind_me_api
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Remind Me API v1");
+                c.SwaggerEndpoint("swagger/v1/swagger.json", "Remind Me API v1");
                 c.RoutePrefix = string.Empty;
             });
 

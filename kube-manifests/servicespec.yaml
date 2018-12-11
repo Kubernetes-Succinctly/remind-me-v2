@@ -57,7 +57,7 @@ kind: StatefulSet
 metadata:
   name: remindmeapi-statefulset # name of our stateful set
 spec:
-  serviceName: 'remind-me-api-ss' # domain name of stateful service
+  serviceName: 'remind-me-api-svc' # domain name of stateful service
   selector:
     matchLabels:
       app: remindmeapi # I'll deploy to all pods that have this label
