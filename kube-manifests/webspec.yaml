@@ -24,9 +24,9 @@ spec:
               cpu: 100m
               memory: 100Mi
           env:
-            - name: GET_HOSTS_FROM
-              value: env
-            - name: apiUrl
+            - name: GET_HOSTS_FROM # This variable tells the service to find service host information from dns service. You can change this value to 'env' to query service hosts from environment variables.
+              value: dns
+            - name: apiUrl # This environment variable is used by the application to connect to the API
               value: http://remindmeapi-statefulset-0.remind-me-api-svc.default.svc.cluster.local
           ports:
             - containerPort: 80
@@ -48,4 +48,3 @@ spec:
       nodePort: 31120 # external users can access this service on port 31120 using kube-proxy.
   selector:
     app: remindmeweb
-# https://kubernetes.io/docs/concepts/services-networking/connect-applications-service/
