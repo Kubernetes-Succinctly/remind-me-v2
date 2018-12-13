@@ -41,11 +41,5 @@ namespace remind_me_api.Controllers
                 remindersCollection.Insert(value);
             }
         }
-
-        [HttpDelete("{id}")]
-        public void Delete(string id)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
